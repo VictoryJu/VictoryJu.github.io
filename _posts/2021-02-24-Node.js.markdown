@@ -4,7 +4,7 @@ title: Node.JS
 image: node.png
 date: 2021-02-24 23:35:20 +0200
 tags:
-categories: node-js
+categories: nodejs
 ---
 
 # Node.Js란?

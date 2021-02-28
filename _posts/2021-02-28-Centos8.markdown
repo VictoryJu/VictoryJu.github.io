@@ -26,6 +26,7 @@ nginx를 설치하기전 yum 외부 저장소를 추가해주어야 한다.
 ### nginx repo 설정
 ![]({{site.baseurl}}/images/mydeal/nginx-repo설정.jpg)
 
+
 ***
 
 그 다음 아래의 명령어를 사용해 nginx를 설치한다. 
@@ -43,7 +44,7 @@ nginx가 잘 설치되었는지 실행해서 확인해본다.
 
 ***
 
-### nginx가 잘 설치되었다.
+#### nginx가 잘 설치되었다.
 ![]({{site.baseurl}}/images/mydeal/start-nginx.PNG)
 
 ***
@@ -55,7 +56,7 @@ port도 열려있는지 telnet을 설치해서 확인해본다.
 
 ***
 
-### port도 잘 열려있다.
+#### port도 잘 열려있다.
 ![]({{site.baseurl}}/images/mydeal/nginx포트.PNG)
 
 ***

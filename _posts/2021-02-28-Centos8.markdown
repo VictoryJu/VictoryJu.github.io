@@ -1,0 +1,58 @@
+---
+layout: post
+title: Centos8에서 Nginx 설치하기
+image: centos.png
+date: 2021-02-28 23:35:20 +0200
+tags:
+categories: mydeal
+---
+
+# Centos8 Nginx 설치
+SSAC 팀 프로젝트를 진행하면서 실습한 내용들을 정리하고자한다.
+클라우드 서버는 오라클 클라우드를 사용했으며 추후에 오라클 클라우드 사용법도 업로드하겠다.
+
+nginx를 설치하기전 yum 외부 저장소를 추가해주어야 한다.
+
+아래의 명령어로 저장소를 추가하자
+{% highlight js %}
+  sudo vi /etc/yum.repos.d/nginx.repo
+{% endhighlight %}
+
+내용은 아래와 같이 입력하고 밑줄친 부분을 자신의 os에 맞게 수정해주면된다.
+사용한 OS는 Centos이고 8버젼이기 때문에 알맞게 수정해준 뒤 :wq로 저장하고 나온다.
+
+***
+### nginx repo 설정
+![]({{site.baseurl}}/images/mydeal/nginx-repo설정.jpg)
+***
+
+그 다음 아래의 명령어를 사용해 nginx를 설치한다. 
+(sudo 붙이기 귀찮으면 sudo -i 명령어를 입력해 root권한으로 설치하면된다.)
+
+{% highlight js %}
+  sudo yum install nginx -y
+{% endhighlight %}
+
+nginx가 잘 설치되었는지 실행해서 확인해본다.
+{% highlight js %}
+  sudo nginx
+  ps -ef | grep nginx
+{% endhighlight %}
+
+***
+### nginx가 잘 설치되었다.
+![]({{site.baseurl}}/images/mydeal/start-nginx.PNG)
+***
+
+port도 열려있는지 telnet을 설치해서 확인해본다.
+{% highlight js %}
+  sudo yum install telnet -y
+{% endhighlight %}
+
+***
+### port도 잘 열려있다.
+![]({{site.baseurl}}/images/mydeal/nginx포트.PNG)
+***
+
+기본적인 nginx 설치는 여기서 마무리하고 다음편에서 
+방화벽설정과 재부팅시에도 nginx가 실행되도록 설정하겠다.

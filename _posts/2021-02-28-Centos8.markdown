@@ -22,8 +22,10 @@ nginx를 설치하기전 yum 외부 저장소를 추가해주어야 한다.
 사용한 OS는 Centos이고 8버젼이기 때문에 알맞게 수정해준 뒤 :wq로 저장하고 나온다.
 
 ***
+
 ### nginx repo 설정
 ![]({{site.baseurl}}/images/mydeal/nginx-repo설정.jpg)
+
 ***
 
 그 다음 아래의 명령어를 사용해 nginx를 설치한다. 
@@ -40,8 +42,10 @@ nginx가 잘 설치되었는지 실행해서 확인해본다.
 {% endhighlight %}
 
 ***
+
 ### nginx가 잘 설치되었다.
 ![]({{site.baseurl}}/images/mydeal/start-nginx.PNG)
+
 ***
 
 port도 열려있는지 telnet을 설치해서 확인해본다.
@@ -50,8 +54,10 @@ port도 열려있는지 telnet을 설치해서 확인해본다.
 {% endhighlight %}
 
 ***
+
 ### port도 잘 열려있다.
 ![]({{site.baseurl}}/images/mydeal/nginx포트.PNG)
+
 ***
 
 기본적인 nginx 설치는 여기서 마무리하고 다음편에서 

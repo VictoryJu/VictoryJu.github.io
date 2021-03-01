@@ -26,14 +26,14 @@ sudo firewall-cmd --zone=public --add-port=80/tcp --permanent
 
 ***
 
-#### Nginx 방화벽 설정
+### Nginx 방화벽 설정
 ![]({{site.baseurl}}/images/mydeal/영구적으로-포트를-추가한다-방화벽설정.PNG)
 ![]({{site.baseurl}}/images/mydeal/https-방화벽.PNG)
 ![]({{site.baseurl}}/images/mydeal/mysql-방화벽.PNG)
 
 ***
 
-#### 방화벽 설정 후 반드시 reload
+### 방화벽 설정 후 반드시 reload
 ![]({{site.baseurl}}/images/mydeal/방화벽-reload.PNG)
 
 ***
@@ -46,9 +46,9 @@ sudo firewall-cmd --zone=public --add-port=80/tcp --permanent
 
 ***
 
-### 마치며  
+**마치며**  
 
-** 공부를 하기위해 작성한 글이며 잘못된 정보가 있을 수 있습니다.**  
+*공부를 하기위해 작성한 글이며 잘못된 정보가 있을 수 있습니다.*  
 
 다음 화에 mysql설치와 certbot설치를 업로드하겠다.  
 

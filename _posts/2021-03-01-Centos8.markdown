@@ -9,6 +9,8 @@ categories: mydeal
 
 # CentOS8 Nginx 방화벽
 
+***
+
 방화벽을 설정하기위해 아래와 같은 명령어로 firewalld를 설치한다.
 
 {% highlight js %}
@@ -28,6 +30,8 @@ sudo firewall-cmd --zone=public --add-port=80/tcp --permanent
 ![]({{site.baseurl}}/images/mydeal/https-방화벽.PNG)
 ![]({{site.baseurl}}/images/mydeal/mysql-방화벽.PNG)
 
+***
+
 #### 방화벽 설정 후 반드시 reload
 ![]({{site.baseurl}}/images/mydeal/방화벽-reload.PNG)
 
@@ -39,8 +43,12 @@ sudo firewall-cmd --zone=public --add-port=80/tcp --permanent
   sudo systemctl enabel nginx
 {% endhighlight %}
 
+***
+
 ### 마치며
-** 공부를 하기위해 작성한 글이며 잘못된 정보가 있을 수 있습니다.**
+
+  ** 공부를 하기위해 작성한 글이며 잘못된 정보가 있을 수 있습니다.**
+
 다음 화에 mysql설치와 certbot설치를 업로드하겠다.
 생각보다 블로그에 글쓰는것에 신경을 많이 써야 할 것 같다.
 자칫 잘못된 정보를 제공할 수 있으니 조심해야겠다.

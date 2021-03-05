@@ -13,8 +13,7 @@ systemctl enable mysqld
 {& endhighlight %}  
 ***
 
-MySQL의 설정파일은 /etc/my.conf 였었는데  
-/etc/my.conf.d 로 바뀌었다.
+
 #### 바뀐 위치
 ![]({{site.baseurl}}/images/mydeal/mysql설정파일.PNG)  
 ***

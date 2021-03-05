@@ -80,3 +80,35 @@ Medium은 숫자,대소문자,특수문자를 포함한 8자리이상의 패스�
 해당 규칙에 맞게 입력하면 이 패스워드로 진행할것이냐 묻는데 Y를 입력해준다.  
 
 ![]({{site.baseurl}}/images/mydeal/mysql-secure-규칙.PNG)  
+
+그다음도 Y 입력
+
+![]({{site.baseurl}}/images/mydeal/mysql-secure-user.PNG)  
+
+root가 외부에서 들어오면 해킹의 위협이있으므로 root를 막기위해 Y 입력
+
+![]({{site.baseurl}}/images/mydeal/mysql-secure-root.PNG)  
+
+입력한 데이터도 없기때문에 testdb삭제할거냐는 질문에 Y 입력
+
+![]({{site.baseurl}}/images/mydeal/mysql-secure-test.PNG)  
+
+테이블 갱신 질문에도 Y 입력
+
+![]({{site.baseurl}}/images/mydeal/mysql-secure-table.PNG)  
+
+설정이 완료되었으니 MySQL에 아래의 명령어를 통해 root로 패스워드를 입력하고 접속해보자.
+{% highlight js %}
+mysql -u root -p
+{& endhighlight %} 
+
+#### MySQL 접속 성공
+![]({{site.baseurl}}/images/mydeal/mysql-secure-정상.PNG)
+
+MySQL설치는 이렇게 마무리하겠다.  
+
+
+## 마치며  
+__ 공부를 목적으로 적는 글이며 잘못된 정보가 있을 수 있습니다. __  
+  
+  다음 포스팅에서는 workbench설정을 하고 Certbot으로 hhtps 인증을 하도록 하겠다.

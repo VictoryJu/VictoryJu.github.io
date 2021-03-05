@@ -57,7 +57,8 @@ mysql_secure_installation
 {& endhighlight %}  
 ***
 #### MySQL 패스워드 설정
-![]({{site.baseurl}}/images/mydeal/mysql-secure설정.PNG)
+![]({{site.baseurl}}/images/mydeal/mysql-secure설정.PNG)  
+
 Y를 입력하고, 보안등급은 Medium인 1을 입력한다.
 ![]({{site.baseurl}}/images/mydeal/mysql-secure-mid.PNG)  
 Medium은 숫자,대소문자,특수문자를 포함한 8자리이상의 패스워드를 입력하여야한다.  

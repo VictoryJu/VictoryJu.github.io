@@ -1,0 +1,40 @@
+---
+layout: post
+title: CentOS8에서 MySQL 설치하기 - 2
+image: mysql.png
+date: 2021-03-06 00:35:20 +0200
+tags:
+categories: mydeal
+---
+
+![]({{site.baseurl}}/images/mydeal/mysql-start.PNG)  
+***
+#### MySQL이 잘 실행 되었다.
+![]({{site.baseurl}}/images/mydeal/psmysqld.PNG)  
+***
+
+Nginx와 마찬가지로 부팅시에 자동으로 실행될 수 있도록 아래의 명령어를 입력한다.  
+{% highlight js %}
+systemctl enable mysqld
+{& endhighlight %}  
+***
+
+MySQL의 설정파일은 /etc/my.conf 였었는데  
+/etc/my.conf.d 로 바뀌었다.
+#### 바뀐 위치
+![]({{site.baseurl}}/images/mydeal/mysql설정파일.PNG)  
+***
+
+다음으로 아래의 명령어로 MySQL 패스워드 설정을 진행한다.
+{% highlight js %}
+mysql_secure_installation
+{& endhighlight %}  
+***
+#### MySQL 패스워드 설정
+![]({{site.baseurl}}/images/mydeal/mysql-secure설정.PNG)  
+
+Y를 입력하고, 보안등급은 Medium인 1을 입력한다.
+![]({{site.baseurl}}/images/mydeal/mysql-secure-mid.PNG)  
+Medium은 숫자,대소문자,특수문자를 포함한 8자리이상의 패스워드를 입력하여야한다.  
+해당 규칙에 맞게 입력하면 이 패스워드로 진행할것이냐 묻는데 Y를 입력해준다.  
+![]({{site.baseurl}}/images/mydeal/mysql-secure-규칙.PNG)  

@@ -96,10 +96,12 @@ root가 외부에서 들어오면 해킹의 위협이있으므로 root를 막기
 
 ![]({{site.baseurl}}/images/mydeal/mysql-secure-table.PNG)  
 
-설정이 완료되었으니 MySQL에 아래의 명령어를 통해 root로 패스워드를 입력하고 접속해보자.
+설정이 완료되었으니 MySQL에 아래의 명령어를 통해 root로 패스워드를 입력하고 접속해보자.  
+
 {% highlight js %}
 mysql -u root -p
 {& endhighlight %} 
+  
 
 #### MySQL 접속 성공
 ![]({{site.baseurl}}/images/mydeal/mysql-secure-정상.PNG)

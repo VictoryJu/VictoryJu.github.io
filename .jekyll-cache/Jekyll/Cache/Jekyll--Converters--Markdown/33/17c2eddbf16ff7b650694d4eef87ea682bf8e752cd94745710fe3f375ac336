@@ -1,0 +1,44 @@
+I"0	<h1 id="centos8-nginx-방화벽">CentOS8 Nginx 방화벽</h1>
+
+<hr />
+
+<p>방화벽을 설정하기위해 아래와 같은 명령어로 firewalld를 설치한다.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">sudo</span> <span class="nx">yum</span> <span class="nx">install</span> <span class="nx">firewalld</span> <span class="o">-</span><span class="nx">y</span></code></pre></figure>
+
+<p>설치가 완료되었으면 아래의 명령어로 해당 port에 방화벽을 설정한다.<br />
+http(80), https(443), mysql(3306), mysqlx(33060)</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">sudo</span> <span class="nx">firewall</span><span class="o">-</span><span class="nx">cmd</span> <span class="o">--</span><span class="nx">zone</span><span class="o">=</span><span class="kr">public</span> <span class="o">--</span><span class="nx">add</span><span class="o">-</span><span class="nx">port</span><span class="o">=</span><span class="mi">80</span><span class="o">/</span><span class="nx">tcp</span> <span class="o">--</span><span class="nx">permanent</span></code></pre></figure>
+
+<hr />
+
+<h3 id="nginx-방화벽-설정">Nginx 방화벽 설정</h3>
+<p><img src="/images/mydeal/영구적으로-포트를-추가한다-방화벽설정.PNG" alt="" />
+<img src="/images/mydeal/https-방화벽.PNG" alt="" />
+<img src="/images/mydeal/mysql-방화벽.PNG" alt="" /></p>
+
+<hr />
+
+<h3 id="방화벽-설정-후-반드시-reload">방화벽 설정 후 반드시 reload</h3>
+<p><img src="/images/mydeal/방화벽-reload.PNG" alt="" /></p>
+
+<hr />
+
+<p>아래와 같은 명령어를 사용하면 재부팅시에도 자동으로 실행되게 할 수 있다.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js">  <span class="nx">sudo</span> <span class="nx">systemctl</span> <span class="nx">enabel</span> <span class="nx">nginx</span></code></pre></figure>
+
+<hr />
+
+<p><strong>마치며</strong></p>
+
+<p><em>공부를 하기위해 작성한 글이며 잘못된 정보가 있을 수 있습니다.</em></p>
+
+<p>다음 화에 mysql설치와 certbot설치를 업로드하겠다.</p>
+
+<p>생각보다 블로그에 글쓰는것에 신경을 많이 써야 할 것 같다.</p>
+
+<p>자칫 잘못된 정보를 제공할 수 있으니 조심해야겠다.</p>
+
+:ET

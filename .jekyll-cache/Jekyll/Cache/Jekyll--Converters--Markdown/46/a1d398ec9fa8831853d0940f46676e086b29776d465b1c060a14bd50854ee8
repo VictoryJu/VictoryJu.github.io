@@ -1,0 +1,51 @@
+I"'<h1 id="centos8-nginx-설치">Centos8 Nginx 설치</h1>
+<p>팀 프로젝트를 진행하면서 실습한 내용들을 정리하고자한다.
+클라우드 서버는 오라클 클라우드를 사용했으며 추후에 오라클 클라우드 사용법도 업로드하겠다.</p>
+
+<p>nginx를 설치하기전 yum 외부 저장소를 추가해주어야 한다.</p>
+
+<p>아래의 명령어로 저장소를 추가하자</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js">  <span class="nx">sudo</span> <span class="nx">vi</span> <span class="o">/</span><span class="nx">etc</span><span class="o">/</span><span class="nx">yum</span><span class="p">.</span><span class="nx">repos</span><span class="p">.</span><span class="nx">d</span><span class="o">/</span><span class="nx">nginx</span><span class="p">.</span><span class="nx">repo</span></code></pre></figure>
+
+<p>내용은 아래와 같이 입력하고 밑줄친 부분을 자신의 os에 맞게 수정해주면된다.
+사용한 OS는 Centos이고 8버젼이기 때문에 알맞게 수정해준 뒤 :wq로 저장하고 나온다.</p>
+
+<hr />
+
+<h3 id="nginx-repo-설정">nginx repo 설정</h3>
+<p><img src="/images/mydeal/nginx-repo설정.jpg" alt="" /></p>
+
+<hr />
+
+<p>그 다음 아래의 명령어를 사용해 nginx를 설치한다. 
+(sudo 붙이기 귀찮으면 sudo -i 명령어를 입력해 root권한으로 설치하면된다.)</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js">  <span class="nx">sudo</span> <span class="nx">yum</span> <span class="nx">install</span> <span class="nx">nginx</span> <span class="o">-</span><span class="nx">y</span></code></pre></figure>
+
+<p>nginx가 잘 설치되었는지 실행해서 확인해본다.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js">  <span class="nx">sudo</span> <span class="nx">nginx</span>
+  <span class="nx">ps</span> <span class="o">-</span><span class="nx">ef</span> <span class="o">|</span> <span class="nx">grep</span> <span class="nx">nginx</span></code></pre></figure>
+
+<hr />
+
+<h4 id="nginx가-잘-설치되었다">nginx가 잘 설치되었다.</h4>
+<p><img src="/images/mydeal/start-nginx.PNG" alt="" /></p>
+
+<hr />
+
+<p>port도 열려있는지 telnet을 설치해서 확인해본다.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js">  <span class="nx">sudo</span> <span class="nx">yum</span> <span class="nx">install</span> <span class="nx">telnet</span> <span class="o">-</span><span class="nx">y</span></code></pre></figure>
+
+<hr />
+
+<h4 id="port도-잘-열려있다">port도 잘 열려있다.</h4>
+<p><img src="/images/mydeal/nginx포트.PNG" alt="" /></p>
+
+<hr />
+
+<p>기본적인 nginx 설치는 여기서 마무리하고 다음편에서 
+방화벽설정과 재부팅시에도 nginx가 실행되도록 설정하겠다.</p>
+:ET

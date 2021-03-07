@@ -50,7 +50,7 @@ CREATE USER '아이디'@'호스트' IDENTIFIED WITH mysql_native_password BY '�
 mydealdb의 모든 테이블에 권한을 갖게 하기위해 아래와 같이 입력한다.
 
 {% highlight js %}
-GRANT 권한 ON 데이터베이스.테이블 TO '아이디'@'호스트" WITH GRANT OPTION;
+GRANT 권한 ON 데이터베이스.테이블 TO '아이디'@'호스트' WITH GRANT OPTION;
 {% endhighlight %}
 
 ***
@@ -80,5 +80,16 @@ Test Connection으로 연결 테스트를 해주고 OK를 눌러 마무리한다
 ![]({{site.baseurl}}/images/mydeal/mysql-workbench.jpg)
 
 ***
+
+![]({{site.baseurl}}/images/mydeal/workbench.PNG)
+생성된 것을 더블클릭하면 해당 workbench에 접속 할 수 있다.
+
+***
+
+## 마치며
+___공부를 목적으로 적는 글이며 잘못된 정보가 있을 수 있습니다.___
+막상 해보면 별거 없지만 할때마다 헷갈린다.  
+반복숙달하여 잘 익혀두도록 하자.  
+다음 포스팅에는 못다한 certbot을 업로드 하도록 하겠다. 
 
 

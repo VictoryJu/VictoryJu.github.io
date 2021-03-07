@@ -1,0 +1,27 @@
+---
+layout: post
+title: CentOS8에서 MySQL 설치하기 -2
+image: mysql.png
+date: 2021-03-07 23:35:20 +0200
+tags:
+categories: mydeal
+---
+
+# CentOS MySQL 설치
+
+Nginx와 마찬가지로 부팅시에 자동으로 실행될 수 있도록 아래의 명령어를 입력한다.  
+
+{% highlight js %}
+systemctl enable mysqld
+{& endhighlight %}  
+
+***
+
+MySQL의 설정파일은 /etc/my.conf 였었는데  
+/etc/my.conf.d 로 바뀌었다.
+
+#### 바뀐 위치
+
+![]({{site.baseurl}}/images/mydeal/mysql설정파일.PNG)  
+
+***

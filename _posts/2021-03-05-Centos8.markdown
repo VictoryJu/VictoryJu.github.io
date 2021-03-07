@@ -103,7 +103,7 @@ mysql -u root -p
 {& endhighlight %} 
   
 
-#### MySQL 접속 성공
+
 ![]({{site.baseurl}}/images/mydeal/mysql-secure-정상.PNG)
 
 MySQL설치는 이렇게 마무리하겠다.  

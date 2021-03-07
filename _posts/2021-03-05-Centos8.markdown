@@ -1,6 +1,6 @@
 ---
 layout: post
-title: CentOS8에서 MySQL 설치하기
+title: CentOS8에서 MySQL 설치하기 -1
 image: mysql.png
 date: 2021-03-05 21:35:20 +0200
 tags:

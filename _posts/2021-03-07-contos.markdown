@@ -19,9 +19,66 @@ MySQL을 편리하게 이용하기 위해 MySQL Workbench를 사용하겠다.
 sudo mysql -u root -p
 {% endhighlight %}
 
-# CREATE DATABASE 데이터베이스 생성
+***
+
+## CREATE DATABASE 데이터베이스 생성
 mydealdb 라는 이름을 가진 데이터 베이스를 생성한다.  
 쿼리문은 아래와 같이 입력한다.
 {% highlight js %}
 CREATE DATABASE mydealdb;
+{% endhighlight %}  
+
+***
+
+## CREATE USER 유저 생성
+외부에서 접근했을때 사용할 User를 생성한다.
+쿼리문은 아래와 같이 입력한다.
+{% highlight js %}
+CREATE USER '아이디'@'호스트' IDENTIFIED WITH mysql_native_password BY '설정할 패스워드';
+{% endhighlight %} 
+아이디@호스트는 접속IP를 의미한다. IP를 특정하지 않으려면 %를 사용한다.
+
+***
+
+## MySQL User 생성
+![]({{site.baseurl}}/images/mydeal/mysql-user.PNG)
+
+***
+
+## GRANT 유저 권한 설정
+유저 권한을 설정한다.  
+mydealdb의 모든 테이블에 권한을 갖게 하기위해 아래와 같이 입력한다.
+
+{% highlight js %}
+GRANT 권한 ON 데이터베이스.테이블 TO '아이디'@'호스트" WITH GRANT OPTION;
 {% endhighlight %}
+
+***
+
+## testdb 생성
+테스트용도로 testdb를 위와 같이 생성한다.  
+과정은 이미지로 보여주고 자세한것은 생략한다.  
+![]({{site.baseurl}}/images/mydeal/mysql-testdb.PNG)
+
+**권한설정을 마친뒤에는 적용이 될 수 있도록 꼭 flush privileges 를 입력해준다.**
+
+***
+
+## MySQL Workbench 설정
+데이터베이스와 유저를 생성했으면  
+MySQL Workbench를 설정하자.  
+
+MySQL Workbench를 실행한뒤 + 버튼을 클릭한다.  
+![]({{site.baseurl}}/images/mydeal/mysql-초기.PNG)
+
+***
+
+입력창이 뜨면  
+번호 순서대로 **공인IP, 생성한User이름, 패스워드, 기본스키마**를 입력한 뒤  
+Test Connection으로 연결 테스트를 해주고 OK를 눌러 마무리한다.
+
+![]({{site.baseurl}}/images/mydeal/mysql-workbench.jpg)
+
+***
+
+

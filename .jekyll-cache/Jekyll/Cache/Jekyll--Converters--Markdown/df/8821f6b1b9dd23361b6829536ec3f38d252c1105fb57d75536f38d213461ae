@@ -1,0 +1,53 @@
+I"�<h1 id="centos-mysql-설치">CentOS MySQL 설치</h1>
+<p>firewall을 설치할때는 yum을 사용하여 설치를 하였다.<br />
+CentOS 8버젼부터는 dnf를 지원하는데 yum에 비해 성능효율이 좋다고한다.<br />
+따라서 이번 포스팅부터는 dnf에 명령어가 없지않은이상 dnf로 설치를 진행하려한다.</p>
+
+<hr />
+
+<h5 id="아래의-명령어로-mysql을-설치한다">아래의 명령어로 MySQL을 설치한다.</h5>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">sudo</span> <span class="nx">yum</span> <span class="nx">install</span> <span class="nx">mysql</span><span class="o">-</span><span class="nx">server</span> <span class="o">-</span><span class="nx">y</span></code></pre></figure>
+
+<hr />
+
+<h4 id="mysql이-잘-설치-되었다">MySQL이 잘 설치 되었다.</h4>
+<p><img src="/images/mydeal/mysql-com.PNG" alt="" /></p>
+
+<hr />
+
+<p>systemctl 명령을 사용하여 mysql을 실행시켜야한다.<br />
+root권한이 필요하므로 <strong>sudo -i</strong> 명령어를 입력한다.
+그런 다음 아래의 명령어로 MySQL을 실행시킨다.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">systemctl</span> <span class="nx">start</span> <span class="nx">mysqld</span></code></pre></figure>
+
+<p><img src="/images/mydeal/mysql-start.PNG" alt="" /></p>
+
+<hr />
+
+<h4 id="mysql이-잘-실행-되었다">MySQL이 잘 실행 되었다.</h4>
+<p><img src="/images/mydeal/psmysqld.PNG" alt="" /></p>
+
+<hr />
+
+<p>Nginx와 마찬가지로 부팅시에 자동으로 실행될 수 있도록 아래의 명령어를 입력한다.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">systemctl</span> <span class="nx">enable</span> <span class="nx">mysqld</span></code></pre></figure>
+
+<hr />
+
+<p>NCloud때의 MySQL의 설정파일은 /etc/my.conf 였었는데<br />
+OCloud의 MySQL 설정파일 위치는 /etc/my.conf.d 이다.</p>
+
+<hr />
+
+<h4 id="mysql-설정파일-바뀐-위치">MySQL 설정파일 바뀐 위치</h4>
+
+<p><img src="/images/mydeal/mysql-conf.PNG" alt="" /></p>
+
+<hr />
+
+<p>다음으로 아래의 명령어로 MySQL 패스워드 설정을 진행한다.</p>
+
+:ET

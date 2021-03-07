@@ -1,0 +1,5 @@
+I"\<h1 id="centos-mysql-설치">CentOS MySQL 설치</h1>
+<p>firewall을 설치할때는 yum을 사용하여 설치를 하였다.<br />
+CentOS 8버젼부터는 dnf를 지원하는데 yum에 비해 성능효율이 좋다고한다.<br />
+따라서 이번 포스팅부터는 dnf에 명령어가 없지않은이상 dnf로 설치를 진행하려한다.</p>
+:ET

@@ -1,0 +1,155 @@
+---
+layout: post
+title: CentOS8에서 https 설정하기
+image: sertbot.png
+date: 2021-03-08 23:35:20 +0500
+tags:
+categories: mydeal
+---
+
+# Centos8 HTTPS 설정
+저번 포스팅에서는 MySQL을 설치하였다.  
+이번 포스팅에서는 **도메인**을 설정하고 **HTTPS**를 설정하도록 하겠다.  
+***sudo를 붙이기 귀찮으면 sudo -i 명령어를 사용해라***
+***
+
+#### 도메인 설정
+**내도메인.한국** 이 사이트에서 도메인을 생성했다.  
+![]({{site.baseurl}}/images/mydeal/도메인.jpg)    
+빨간 동그라미를 친곳에 **공인I**P**를 입력해 준다.  
+
+***
+
+#### nslookup 으로 확인
+도메인이 잘 설정 되었는지 아래의 명령어로 확인해 본다.
+{% highlight js %}
+nslookup mydeal.kro.kr
+{% endhighlight %}  
+![]({{site.baseurl}}/images/mydeal/nslookup.PNG)  
+Adress에 설정한 공인IP가 알맞게 나오는 것을 확인 할 수 있다.  
+
+***
+
+해당 도메인 으로 접속해서 nginx가 나오면 잘 설정 된 것이다.  
+![]({{site.baseurl}}/images/mydeal/nginx-공인ip.PNG)  
+
+***
+
+certbot을 설치하기 전 리눅스 추가패키지를 아래 명령어로 설치해준다.
+{% highlight js %}
+sudo dnf install epel-release -y
+{% endhighlight %}  
+#### epel이 잘 설치 되었다.  
+![]({{site.baseurl}}/images/mydeal/epel.PNG)  
+
+***
+
+#### nginx index.html 설정  
+certbot을 설정하기 앞서  
+nginx의 빨간 화면이 부담스럽다. 아래의 명령어를 통해 index.html파일을 생성해보자.
+{% highlight js %}
+mkdir -p /var/www/mydeal  
+echo "MyDeal at Oracle Cloud" > /var/www/mydeal/index.html
+{% endhighlight %}  
+-p 옵션을 사용하면 **경**로 까지의 디렉토리를 모두 생성**해준다.  
+echo 메시지로 iudex.html파일을 생성해준다.  
+
+***
+
+#### certbot 설치  
+certbot을 아래 명령어로 설치한다.  
+{% highlight js %}
+sudo dnf install certbot python3-certbot-nginx
+{% endhighlight %}  
+#### certbot이 잘 설치 되었다.  
+![]({{site.baseurl}}/images/mydeal/certbot-설치.PNG)  
+
+***
+
+certbot을 적용시키기 위해 **nginx를 중지** 시킨다.  
+{% highlight js %}
+sudo nginx -s stop
+{% endhighlight %}  
+
+***
+nginx를 중지 시켰다면 certbot을 아래의 명령어로 실행한다.  
+{% highlight js %}
+sudo certbot --standalone -d mydeal.kro.kr certonly
+{% endhighlight %}  
+
+#### certbot 설정
+![]({{site.baseurl}}/images/mydeal/certbot-설정.PNG)  
+1번은 인증서를 받을 **이메일을 입력**하면된다.    
+2번은 ACME server에 등록해도 되는지 물어본다. **Yes를 입력**하자.  
+3번은 광고성 메일을 보내도 되는지 물어보는것같다. **No를 입력**하자.  
+다 입력했다면 아래와 같이 설치가 완료된다.  
+![]({{site.baseurl}}/images/mydeal/certbot-경로.PNG)  
+빨간 박스 안에 있는 경로를 메모장같은데에 복사해둔다.  
+
+***
+#### nginx 설정  
+위에 certbot의 경로를 메모장에 복사해두었다면  
+다음과 같은 경로로 mydeal 설정 파일을 생성한다.  
+{% highlight js %}
+vi /etc/nginx/conf.d/mydeal.conf.d
+{% endhighlight %}  
+#### 이해를 돕기위한 이미지이다.  
+![]({{site.baseurl}}/images/mydeal/certbot-vi.PNG)  
+
+***
+mydeal.conf.d 파일 안에는 아래와 같이 작성한다.  
+빨간 박스안에 메모장에 복사해두었던 경로를 입력해준다.  
+![]({{site.baseurl}}/images/mydeal/certbot-conf.PNG)  
+입력을 마치고 **:wq**로 저장하고 나온다.  
+
+***
+
+#### nginx 재시작  
+mydeal.conf파일을 작성했으니 **nginx -t** 로 테스트를 하고  
+정상작동하면 **nginx를 재시작** 해준다.  
+그다음 **telnet 명령어로 443port**가 연결되는지 확인한다.    
+
+#### nginx test정상, 443 port 정상
+![]({{site.baseurl}}/images/mydeal/nginx-certbot-정상작동.PNG)  
+
+***
+
+#### 도메인으로 접속해보면 https가 적용된 것을 확인할 수 있다.  
+![]({{site.baseurl}}/images/mydeal/certbot-적용됨.PNG)  
+
+***
+
+인증서 갱신을 위해 아래의 명령어로 crontab을 작성하자.  
+{% highlight js %}
+crontab -e
+{% endhighlight %}  
+#### crontab 작성 내용
+![]({{site.baseurl}}/images/mydeal/certbot-인증서.PNG)  
+짝수달 1일에 인증서를 갱신하기로 하였다.  
+
+#### 인증서 확인
+![]({{site.baseurl}}/images/mydeal/https-인증서.PNG) 
+도메인의 인증서가 잘 적용되었는지 확인할 수 있다.  
+
+***
+
+## 마치며  
+___공부를 목적으로 적는 글이며 잘못된 정보가 있을 수 있습니다.___  
+**certbot**을 사용하여 **https**설정까지 마무리 하였다.  
+다음시간 부터는 **Ncloud**의 데이터베이스를 **Ocloud**로 이전 하는것을  
+포스팅하도록 하겠다.  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

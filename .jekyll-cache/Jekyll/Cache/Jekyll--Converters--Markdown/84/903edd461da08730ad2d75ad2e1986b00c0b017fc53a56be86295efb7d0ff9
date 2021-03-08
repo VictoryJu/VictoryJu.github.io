@@ -1,0 +1,82 @@
+I"D<h1 id="centos-mysql-workbench-설정">CentOS MySQL Workbench 설정</h1>
+<p>저번 포스팅에서 MySQL을 설치하였다.<br />
+데이터베이스를 생성하고,
+MySQL을 편리하게 이용하기 위해 MySQL Workbench를 사용하겠다.</p>
+
+<hr />
+
+<p>데이터베이스를 만들기 위해 아래의 명령어를 이용하여 MySQL에 접속한다.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">sudo</span> <span class="nx">mysql</span> <span class="o">-</span><span class="nx">u</span> <span class="nx">root</span> <span class="o">-</span><span class="nx">p</span></code></pre></figure>
+
+<hr />
+
+<h2 id="create-database-데이터베이스-생성">CREATE DATABASE 데이터베이스 생성</h2>
+<p>mydealdb 라는 이름을 가진 데이터 베이스를 생성한다.<br />
+쿼리문은 아래와 같이 입력한다.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">CREATE</span> <span class="nx">DATABASE</span> <span class="nx">mydealdb</span><span class="p">;</span></code></pre></figure>
+
+<hr />
+
+<h2 id="create-user-유저-생성">CREATE USER 유저 생성</h2>
+<p>외부에서 접근했을때 사용할 User를 생성한다.
+쿼리문은 아래와 같이 입력한다.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">CREATE</span> <span class="nx">USER</span> <span class="dl">'</span><span class="s1">아이디</span><span class="dl">'</span><span class="p">@</span><span class="dl">'</span><span class="s1">호스트</span><span class="dl">'</span> <span class="nx">IDENTIFIED</span> <span class="nx">WITH</span> <span class="nx">mysql_native_password</span> <span class="nx">BY</span> <span class="dl">'</span><span class="s1">설정할 패스워드</span><span class="dl">'</span><span class="p">;</span></code></pre></figure>
+
+<p>아이디@호스트는 접속IP를 의미한다. IP를 특정하지 않으려면 %를 사용한다.</p>
+
+<hr />
+
+<h2 id="mysql-user-생성">MySQL User 생성</h2>
+<p><img src="/images/mydeal/mysql-user.PNG" alt="" /></p>
+
+<hr />
+
+<h2 id="grant-유저-권한-설정">GRANT 유저 권한 설정</h2>
+<p>유저 권한을 설정한다.<br />
+mydealdb의 모든 테이블에 권한을 갖게 하기위해 아래와 같이 입력한다.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">GRANT</span> <span class="nx">권한</span> <span class="nx">ON</span> <span class="nx">데이터베이스</span><span class="p">.</span><span class="nx">테이블</span> <span class="nx">TO</span> <span class="dl">'</span><span class="s1">아이디</span><span class="dl">'</span><span class="p">@</span><span class="dl">'</span><span class="s1">호스트</span><span class="dl">'</span> <span class="nx">WITH</span> <span class="nx">GRANT</span> <span class="nx">OPTION</span><span class="p">;</span></code></pre></figure>
+
+<hr />
+
+<h2 id="testdb-생성">testdb 생성</h2>
+<p>테스트용도로 testdb를 위와 같이 생성한다.<br />
+과정은 이미지로 보여주고 자세한것은 생략한다.<br />
+<img src="/images/mydeal/mysql-testdb.PNG" alt="" /></p>
+
+<p><strong>권한설정을 마친뒤에는 적용이 될 수 있도록 꼭 flush privileges 를 입력해준다.</strong></p>
+
+<hr />
+
+<h2 id="mysql-workbench-설정">MySQL Workbench 설정</h2>
+<p>데이터베이스와 유저를 생성했으면<br />
+MySQL Workbench를 설정하자.</p>
+
+<p>MySQL Workbench를 실행한뒤 + 버튼을 클릭한다.<br />
+<img src="/images/mydeal/mysql-초기.PNG" alt="" /></p>
+
+<hr />
+
+<p>입력창이 뜨면<br />
+번호 순서대로 <strong>공인IP, 생성한User이름, 패스워드, 기본스키마</strong>를 입력한 뒤<br />
+Test Connection으로 연결 테스트를 해주고 OK를 눌러 마무리한다.</p>
+
+<p><img src="/images/mydeal/mysql-workbench.jpg" alt="" /></p>
+
+<hr />
+
+<p><img src="/images/mydeal/workbench.PNG" alt="" />
+생성된 것을 더블클릭하면 해당 workbench에 접속 할 수 있다.</p>
+
+<hr />
+
+<h2 id="마치며">마치며</h2>
+<p><strong><em>공부를 목적으로 적는 글이며 잘못된 정보가 있을 수 있습니다.</em></strong><br />
+막상 해보면 별거 없지만 할때마다 헷갈린다.<br />
+반복숙달하여 잘 익혀두도록 하자.<br />
+다음 포스팅에는 못다한 certbot을 업로드 하도록 하겠다.</p>
+
+:ET

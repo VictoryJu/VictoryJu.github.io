@@ -7,7 +7,7 @@ tags:
 categories: mydeal
 ---
 
-# *Centos8* HTTPS 설정
+# Centos8 HTTPS 설정
 저번 포스팅에서는 MySQL을 설치하였다.  
 이번 포스팅에서는 **도메인**을 설정하고 **HTTPS**를 설정하도록 하겠다.  
 **sudo를 붙이기 귀찮으면 sudo -i 명령어를 사용해라**  

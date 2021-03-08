@@ -16,8 +16,10 @@ categories: mydeal
 
 ## 도메인 설정
 **[내도메인.한국](https://xn--220b31d95hq8o.xn--3e0b707e/)** 이 사이트에서 도메인을 생성했다.  
-![]({{site.baseurl}}/images/mydeal/도메인.jpg)     
-빨간 동그라미를 친곳에 **공인I**P**를 입력해 준다.  
+![]({{site.baseurl}}/images/mydeal/도메인.jpg)  
+  
+  
+빨간 동그라미를 친곳에 **공인IP**를 입력해 준다.  
 
 ***
 

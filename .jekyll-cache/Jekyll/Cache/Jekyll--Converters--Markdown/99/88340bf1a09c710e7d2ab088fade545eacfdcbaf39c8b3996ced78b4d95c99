@@ -1,0 +1,5 @@
+I"K<h1 id="centos8-https-설정">Centos8 HTTPS 설정</h1>
+<p>저번 포스팅에서는 MySQL을 설치하였다.<br />
+이번 포스팅에서는 <strong>도메인</strong>을 설정하고 <strong>HTTPS</strong>를 설정하도록 하겠다.<br />
+<strong>sudo를 붙이기 귀찮으면 sudo -i 명령어를 사용해라</strong></p>
+:ET

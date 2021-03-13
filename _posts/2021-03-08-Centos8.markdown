@@ -15,7 +15,7 @@ categories: mydeal
 ***
 
 ## Domain 설정
-**[내도메인.한국](https://xn--220b31d95hq8o.xn--3e0b707e/)** 이 사이트에서 도메인을 생성했다.  
+**[내도메인.한국](https://xn--220b31d95hq8o.xn--3e0b707e/){:target="_blank"}** 이 사이트에서 도메인을 생성했다.  
 ![]({{site.baseurl}}/images/mydeal/도메인.jpg)  
   
 

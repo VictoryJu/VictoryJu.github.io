@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Ncloud 에서 Ocloud로 데이터베이스 이관하기 
-image: oracle.PNG
+image: oracle.png
 date: 2021-03-12 23:35:20 +0500
 tags:
 categories: mydeal

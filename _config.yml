@@ -1,9 +1,6 @@
 title: VictoryJu's blog
-<<<<<<< HEAD
 description: Back-End Developer 개발공부 블로그
-=======
 
->>>>>>> refs/remotes/origin/main
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://VictoryJu.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
 

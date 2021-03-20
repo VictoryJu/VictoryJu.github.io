@@ -15,7 +15,7 @@ Ncloud 에서 Ocloud로 데이터베이스 이관이 성공적으로 끝났다.
 ***
 
 # Full-Backup  
-![]({{site.baseurl}}/images/fullbackup.png)
+![]({{site.baseurl}}/images/fullbackup.png)  
 전체 데이터를 백업하는 방식이다.  
 보통 일단위, 주단위로 백업한다.  
 일단위로 받는것이 보통이다. 일주일 단위로 받으면 백업받는데 너무 오래걸리고,  
@@ -35,19 +35,28 @@ mysqlbinlog를 사용해서 백업하면 된다.
 # full-backup 실습  
 `cd /var/lib/mysql ` 명령어로 mysql 폴더로 이동한다.  
 
-![]({{site.baseurl}}/images/db/fullbackup.png)  
-***비밀번호를 틀려서 명령어를 한번 더 실행했다.***
+![]({{site.baseurl}}/images/db/fullbackup.jpg)  
+***~비밀번호를 틀려서 명령어를 한번 더 실행했다.~***  
 `mysqldump -u root -p -R -v testdb > backup_testdb.sql`  
 해당 명령어를 사용해 backup_testdb.sql 파일을 만든다. -R옵션은 데이터뿐만 아니라  
 프로시저와 함수를 함께 백업하는 옵션으로 앞으로 자주 사용될 것이다. (routines)  
 -v 옵션은 해당 명령어 실행 시 모든 메시지를 출력한다. (verbose)  
-
+`>` 는 export 반대로 `<`는 import이다.
 
 ## 백업파일이 잘 생성되었다.
-![]({{site.baseurl}}/images/db/testdb-fullbackup.png)   
+![]({{site.baseurl}}/images/db/testdb-fullbackup.PNG)   
 
 ***  
 
+# 실제사례 실습  
+다음과 같은 상황이 발생하였다고 가정하여 실습을 진행하겠다.      
+```
+1. Test 테이블 생성 및 5개 데이터 추가(Insert)  
+2. Test 테이블에서 3개 데이터 삭제   
+3. 전체 데이터 백업 (Full Backup)  
+4. Test 테이블에 데이터 변경작업  
+5. 실수로 Test 테이블의 모든 데이터 삭제  
+```  
 
 
 

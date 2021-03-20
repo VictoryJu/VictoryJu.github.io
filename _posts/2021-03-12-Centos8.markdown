@@ -49,7 +49,7 @@ MySQL Workbench를 실행시키고 상단탭에 **Database** -> **Schema Transfe
   
 ***
   
-오류가 발생했다. 
+오류가 발생했다.  
 ![]({{site.baseurl}}/images/db/move-function.PNG)  
 함수를 생성하는 과정에서 권한 오류가 생긴것같다.  
 

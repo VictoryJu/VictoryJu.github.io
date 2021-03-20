@@ -193,7 +193,7 @@ update했던 부분또한 잘 복구된것을 볼 수 있다.
 
 ## 증분량 복구  
 
-`mysql -u root -p testdb < t2.log` 명령어로 2번 증분량을 복구한다.  
+**`mysql -u root -p testdb < t2.log`** 명령어로 2번 증분량을 복구한다.  
   
 
 ![]({{site.baseurl}}/images/db/Test-goodre2.PNG)  

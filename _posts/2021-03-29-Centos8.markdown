@@ -28,10 +28,10 @@ vi /root/bin/backup_ocloud.sh
 ![]({{site.baseurl}}/images/db/auto-createsh.PNG)  
 
 각  코드당 설명은 다음과 같다  
-NOW: 백업 시간 기록   
-ROMTE_SERVER: 원격지 서버 주소  
-OUTDIR: 백업파일을 저장할 위치(미리 만들어놔야한다.)  
-PASSWD: user의 암호  
+>NOW: 백업 시간 기록   
+>ROMTE_SERVER: 원격지 서버 주소  
+>OUTDIR: 백업파일을 저장할 위치(미리 만들어놔야한다.)  
+>PASSWD: user의 암호  
 
 {% highlight js %}
 cd ${OUTDIR}
@@ -92,6 +92,11 @@ crontab -e
 작성이 끝났으면 `:wq` 명령어로 저장한다.  
 crontab이 잘 작동하는지 테스트를 꼭 해보길 바란다. 해당 포스팅에서는 테스트를 했다고 가정하겠다.  
 이렇게 Full-Backup 자동 백업은 마무리하겠다.  
+
+# 마치며  
+___공부를 목적으로 적는 글이며 잘못된 정보가 있을 수 있습니다.___  
+binlog 백업까지 하기에는 너무 길어질것같아서 다음 포스팅에 작성하도록 하겠다.  
+프로젝트 진행속도에 비해 블로그 업로드 속도가 너무 더딘것 같아서 반성하게된다.  
 
 
 

@@ -1,0 +1,12 @@
+---
+layout: post
+title: MySQL 백업하기 -2
+image: mysql.png
+date: 2021-03-29 21:45:00 +1000
+tags:
+categories: mydeal
+---
+
+# 데이터베이스 자동 백업설정  
+Full-Backup과 Incremental-Backup을 진행해 보았다. 이번 포스팅에서는  
+crontab에 해당 명령어를 올려서 자동 백업이 되도록 해보겠다.

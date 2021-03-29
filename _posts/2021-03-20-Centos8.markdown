@@ -27,7 +27,7 @@ categories: mydeal
 # Incremental-Backup  
 ![]({{site.baseurl}}/images/incremental.png)  
 **증분량 백업**이라고도 한다. Full-Backup을 하고 다음 Full-Backup전에 쌓인 데이터(create, insert등)를  
-**증분량** 이라고 하며 이 **증분량에 대한 백업**을 **Incremetal-Backup**이라고 한다.  
+**증분량** 이라고 하며 이 **증분량에 대한 백업**을 **Incremental-Backup**이라고 한다.  
 **mysqlbinlog**를 사용해서 백업하면 된다.  
 
 ***

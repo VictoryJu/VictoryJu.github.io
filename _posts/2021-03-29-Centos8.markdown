@@ -28,10 +28,10 @@ vi /root/bin/backup_ocloud.sh
 ![]({{site.baseurl}}/images/db/auto-createsh.PNG)  
 
 각  코드당 설명은 다음과 같다  
->NOW: 백업 시간 기록   
->ROMTE_SERVER: 원격지 서버 주소  
->OUTDIR: 백업파일을 저장할 위치(미리 만들어놔야한다.)  
->PASSWD: user의 암호  
+>**NOW:** 백업 시간 기록   
+>**ROMTE_SERVER:** 원격지 서버 주소  
+>**OUTDIR:** 백업파일을 저장할 위치(미리 만들어놔야한다.)  
+>**PASSWD:** user의 암호  
 
 {% highlight js %}
 cd ${OUTDIR}

@@ -8,14 +8,14 @@ categories: mydeal
 ---
 
 # 데이터베이스 자동 백업설정  
-Full-Backup과 Incremental-Backup을 진행해 보았다. 이번 포스팅에서는  
-crontab에 해당 명령어를 올려서 자동 백업이 되도록 해보겠다.  
-백업할 서버는 꼭 원격지 서버로 해야한다. 자기 서버에 백업을 해버리면 의미가없다.(디스크깨지면 백업파일도 같이 날아감)  
+**Full-Backup**과 **Incremental-Backup**을 진행해 보았다. 이번 포스팅에서는  
+**crontab**에 해당 명령어를 올려서 **자동 백업**이 되도록 해보겠다.  
+백업할 서버는 **꼭 원격지 서버**로 해야한다. 자기 서버에 백업을 해버리면 의미가없다.(디스크깨지면 백업파일도 같이 날아감)  
 
 ***
 ## Full-Backup  
-백업을 하기에 앞서 crontab에 적용시킬 쉘 스크립트를 하나 작성하도록 하자.  
-쉘 스크립트의 위치는 /root/bin이며 다음 명령어로 쉘 스크립트를 작성하자.  
+백업을 하기에 앞서 **crontab**에 적용시킬 **쉘 스크립트**를 하나 작성하도록 하자.  
+쉘 스크립트의 위치는 **/root/bin**이며 다음 명령어로 쉘 스크립트를 작성하자.  
 {% highlight js %}
 vi /root/bin/backup_ocloud.sh
 {% endhighlight %}  
@@ -37,8 +37,8 @@ vi /root/bin/backup_ocloud.sh
 cd ${OUTDIR}
 /bin/find . -type f -name \*.gz -mtime +3 -delete
 {% endhighlight %}  
-: OUTDIR 디렉토리의 3일이 지난 .gz파일을 찾아서 삭제시킨다.  
-백업 파일을 3일치만 보관하는 스크립트이다.  
+> OUTDIR 디렉토리의 3일이 지난 .gz파일을 찾아서 삭제시킨다.  
+백업 파일을 **3일치**만 보관하는 스크립트이다.  
 
 {% highlight js %}
 for db in conprostdb
@@ -46,24 +46,24 @@ do
   /usr/bin/mysqldump --user="conprost" --passwoed=$PASSWD --single-transaction -R ${db} > ${db}.${NOW}.sql
   /usr/bin/tar -zcf ${db}.${NOW}.tar.gz ${db}.${NOW}.sql
 {% endhighlight %}  
-백업하고자하는 데이터베이스의 이름을 적어주면 된다. 여러개를 적어도된다.  
+백업하고자하는 **데이터베이스**의 이름을 적어주면 된다. 여러개를 적어도된다.  
 `ex) for db in conprostdb testdb `  
-single-transaction옵션으로 서버부담을 줄인다.  
--R 옵션도 꼭 걸어주도록 하자 (함수나 트리거 등을 작성했을때 같이 백업되는 옵션)  
+**single-transaction**옵션으로 서버부담을 줄인다.  
+**-R 옵션**도 꼭 걸어주도록 하자 (**함수나 트리거** 등을 작성했을때 같이 백업되는 옵션)  
 데이터베이스가 여러개면 ${db} 에 데이터베이스가 담겨서 for문으로 다 백업이 될것이다.  
-백업파일은 'db이름.백업시간.sql'이 될것이다.  
-dump가 완료된 파일을 tar.gz으로 압축한다.  
+백업파일은 **'db이름.백업시간.sql'**이 될것이다.    
+dump가 완료된 파일을 **tar.gz**으로 압축한다.  
 
 {% highlight js %}
 /usr/bin/rm -f *.sql
 {% endhighlight %}  
-dump파일을 압축했기때문에 압축에 사용된 dump파일은 삭제한다.  
+dump파일을 압축했기때문에 압축에 사용된 **dump파일은 삭제**한다.  
 
 {% highlight js %}
 /usr/bin/rsync -az --delete ./ ${REMOTE_SERVER}:/data/backup/ocloud
 {% endhighlight %}  
 3일지난 파일이 지워졌으면 마찬가지로 원격지에서도 삭제되도록 한다.  
-(원격지에 /data/backup/ocloud 디렉토리를 생성해놔야 한다.)  
+(원격지에 /data/backup/ocloud 디렉토리를 생성해야 한다.)  
 
 모두 작성하였으면 `:wq` 명령어로 저장한다.  
 {% highlight js %}
@@ -78,7 +78,7 @@ chmod 명령어로 실행권한을 주고 `/root/bin/backup_ocloud.sh` 로 실�
 
 ## Crontab 작성
 
-백업이 잘 되는것을 확인했으니 다음 명령어로 crontab에 올려서 자동으로 백업이 되도록 하자.  
+백업이 잘 되는것을 확인했으니 다음 명령어로 **crontab**에 올려서 자동으로 백업이 되도록 하자.  
 {% highlight js %}
 crontab -e
 {% endhighlight %}  
@@ -87,11 +87,11 @@ crontab -e
 
 ![]({{site.baseurl}}/images/db/auto-crontab.PNG)   
 
-분 시 일 월 주 순서이다.   
-0분 오전5시 매일 매월 매주 백업을진행하고 log를 남긴다. 2>&1는 에러를 무시하는 옵션이다.  
+**분 시 일 월 주** 순서이다.   
+**오전5시에 매일** 백업을진행하고 log를 남긴다. 2>&1는 에러를 무시하는 옵션이다.  
 작성이 끝났으면 `:wq` 명령어로 저장한다.  
-crontab이 잘 작동하는지 테스트를 꼭 해보길 바란다. 해당 포스팅에서는 테스트를 했다고 가정하겠다.  
-이렇게 Full-Backup 자동 백업은 마무리하겠다.  
+**crontab**이 잘 작동하는지 테스트를 꼭 해보길 바란다. 해당 포스팅에서는 테스트를 했다고 가정하겠다.  
+이렇게 **Full-Backup** 자동 백업은 마무리하겠다.  
 
 # 마치며  
 ___공부를 목적으로 적는 글이며 잘못된 정보가 있을 수 있습니다.___  

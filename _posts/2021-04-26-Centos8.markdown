@@ -8,4 +8,24 @@ categories: mydeal
 ---
 
 # 데이터베이스 자동 백업설정  
-저번 포스팅에서 full-backup을 진행하였다. 이번 포스팅에서는 binlog를 자동 백업해보자.  
+저번 포스팅에서 full-backup을 진행하였다. 이번 포스팅에서는 binlog를 자동 백업해보자.  binlog는 Replication해서 백업을 한다.  
+
+---------
+
+## Mysql Replication  
+![]({{site.baseurl}}/images/rep/rep.png)  
+- 두 대의 서버가 있을 때 하나의 서버를 Master, 하나를 Slave서버로 지정한다.  
+- Master서버에서 Slave서버로 데이터가 Sync되어 사용된다.  
+- Salve는 Read-only상태이기때문에 Write는 되지않는다.  
+- Write할 때는 Master서버에서 하고 Read는 Master, Slave 둘다 서비스 하는것을 Replication이라고 한다.  
+
+Master에 있는 binlog를 Slave로 계속해서 가져오는거로 실시간 binlog 백업을 진행한다.  
+
+------
+
+## Replication을 위한 User(Replicator) 생성하기  
+Master로 지정할 서버에서 다음 명령어로 Mysql에 접속한다.  
+{% highlight js %}
+sudo mysql -u root -p
+{% endhighlight %}  
+

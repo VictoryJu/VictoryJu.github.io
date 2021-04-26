@@ -8,24 +8,123 @@ categories: mydeal
 ---
 
 # 데이터베이스 자동 백업설정  
-저번 포스팅에서 full-backup을 진행하였다. 이번 포스팅에서는 binlog를 자동 백업해보자.  binlog는 Replication해서 백업을 한다.  
+저번 포스팅에서 **full-backup**을 진행하였다. 이번 포스팅에서는 **binlog를 자동 백업**해보자.  binlog는 **Replication**해서 백업을 한다.  
 
 ---------
 
 ## Mysql Replication  
 ![]({{site.baseurl}}/images/rep/rep.png)  
-- 두 대의 서버가 있을 때 하나의 서버를 Master, 하나를 Slave서버로 지정한다.  
-- Master서버에서 Slave서버로 데이터가 Sync되어 사용된다.  
-- Salve는 Read-only상태이기때문에 Write는 되지않는다.  
-- Write할 때는 Master서버에서 하고 Read는 Master, Slave 둘다 서비스 하는것을 Replication이라고 한다.  
+- 두 대의 서버가 있을 때 하나의 서버를 **Master**, 하나를 **Slave**서버로 지정한다.  
+- **Master서버**에서 **Slave서버**로 데이터가 **Sync**되어 사용된다.  
+- **Salve**는 **Read-only**상태이기때문에 **Write**는 되지않는다.  
+- **Write**할 때는 **Master서버**에서 하고 **Read**는 **Master, Slave** 둘다 서비스 하는것을 **Replication**이라고 한다.  
 
 Master에 있는 binlog를 Slave로 계속해서 가져오는거로 실시간 binlog 백업을 진행한다.  
 
 ------
 
-## Replication을 위한 User(Replicator) 생성하기  
-Master로 지정할 서버에서 다음 명령어로 Mysql에 접속한다.  
+## Replication을 위한 User(Replicator) 생성하기(Master-Server)  
+**Master**로 지정할 서버에서 다음 명령어로 **Mysql**에 접속한다.  
 {% highlight js %}
 sudo mysql -u root -p
 {% endhighlight %}  
+
+**CREATE USER** 명령어를 통해 **Replicator**를 생성한뒤, **GRANT** 명령어로 **권한을 부여**한다.  
+권한은 **replication**에 대한 권한만 부여하고, 모든 **DB**에 권한을 부여해야 모든 DB의 binlog 데이터를 가져올 수 있기 때문에 권한을 모두 준다.  
+{% highlight js %}
+CREATE USER 'replicator'@'%'IDENTIFIED WITH mysql_native_password BY '비밀번호입력';  
+GRANT replication slave on *.* to 'replicator'@'%'; //slave에서 접속용으로 쓰이는 유저이다.  
+flush privileges;//수정사항 반영  
+reset master;//Master를 초기화 하고 시작한다.  
+{% endhighlight %}  
+
+--------  
+
+이렇게 **Master 서버** 설정을 끝내고 나와서 **mysql를 재실행** 시켜준다.  
+{% highlight js %}
+sudo systemctl restart mysqld
+{% endhighlight %}  
+
+-----------  
+
+## Slave-Server 설정  
+binlog를 백업하기 위해선 **serverid**가 필요하다.  
+serverid의 **default값**은 **1**이다. 이 id값이 Master서버와 Slave서버가 같게되면 어디서 데이터가 온것인지 **모르기때문**에 **serverid**를 설정파일에서 바꿔줘야한다.  
+## Master-ServerId  
+아래의 명령어로 **serverid**를 확인해보자.  
+{% highlight js %}
+SELECT @@server_id;
+{% endhighlight %}  
+![]({{site.baseurl}}/images/rep/rep-masterid.PNG)  
+Master서버의 serverid는 1로 default값이 설정되어있다. Slave서버의 serverid를 바꿔보자.  
+보는김에 Slave서버에서 필요한 binlog파일과 **Position**을 보고가자.(workbench에서 해도되고 서버에서 해도된다.)  
+{% highlight js %}
+show master status;
+{% endhighlight %}  
+![]({{site.baseurl}}/images/rep/rep-master-pos.PNG)  
+백업할 binlog파일은 **binlog.000003**이고 **Position**은 **747**이다.  
+
+## Slave-ServerId  
+**Slave서버**의 **mysql설정파일** 내용을 수정하여 **serverid**를 바꿔보자.  
+{% highlight js %}
+sudo vi /etc/my.cnf.d/mysql-server.cnf //mysql 설정파일 위치  
+{% endhighlight %}  
+
+## Mysql 설정파일 수정  
+![]({{site.baseurl}}/images/rep/rep-slave-myconf.PNG)  
+**serverid를 101**로 설정하였다. serverid밑에 코드는 **Replication**을 사용할때 사용되는 코드이다. 현재는 master서버와 slave서버를 동시에 사용하지않기에 주석처리를 해놓자.  
+맨 밑에줄의 **expire_logs_day=3** 코드는 **3일**동안만 binlog를 저장하라는 의미이다.  
+다 적었으면 **:wq**로 저장한뒤 나온다.  
+
+-----------------  
+
+## Slave-Server 설정  
+Slave로 지정할 서버에서 mysql에 접속해준다.  
+{% highlight js %}
+sudo mysql -u root -p
+{% endhighlight %}  
+
+그런뒤 밑에 명령어로 설정을한다.  
+{% highlight js %}
+change master to master_host="해당 서버 공인ip", 
+	master_user="replicator", //위에서 설정한 replicator이름
+	master_password='패스워드', //위에서 설정한 패스워드
+	master_log_file="binlog.000003", //위에서 확인한 Master서버의 binlog파일
+	master_log_pos=747; //위에서 확인한 Master서버의 Position
+{% endhighlight %}  
+설정을 마쳤으면 빠져나와서 **mysql을 재시작** 해준다.  
+
+{% highlight js %}
+sudo systemctl restart mysqld
+{% endhighlight %}  
+다시 mysql에 접속해서 **Slave를 실행**시켜주자.  
+{% highlight js %}
+start slave; //slave 실행
+show slave status\G; //slave정보를 확인 
+{% endhighlight %}  
+
+![]({{site.baseurl}}/images/rep/rep-show.PNG)  
+박스표시한것이 목적지에서 가지고있는 binlog이다.  
+**slave**가 잘 실행된것을 볼 수 있다.  
+
+## relay-bin  
+다음 명령어로 Slave서버에서 binlog파일이 백업되는 폴더로 이동하고, 파일을 확인해보자.  
+{% highlight js %}
+cd /var/lib/mysql  
+ls -al
+{% endhighlight %}  
+![]({{site.baseurl}}/images/rep/rep-slave-backup.PNG)  
+**binlog파일**이 정상적으로 백업된것을 볼 수 있다.  
+이것으로 binlog백업이 성공적으로 끝났다.
+
+## 마치며  
+___공부를 목적으로 적는 글이며 잘못된 정보가 있을 수 있습니다.___  
+**binlog백업**까지 성공적으로 마쳤다. 서버설정은 이정도에서 마무리 하도록 하고, 프로젝트를 위한 코딩을 들어갈것같다. 기사시험과 취업면접준비를 하다보니 업로드가 많이늦어졌다. 취업 하고나서도 꾸준히 업로드 해야겠다.
+
+
+
+
+
+
+
 
